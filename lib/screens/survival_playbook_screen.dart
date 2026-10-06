@@ -467,6 +467,45 @@ class SurvivalPlaybookScreen extends StatelessWidget {
 
           _buildPlaybookCard(
             context: context,
+            title: '🕳️ Underground Confined Space & Toxic Sewer Gas (CPHEEO)',
+            accentColor: const Color(0xFFDC2626),
+            summary: 'H2S / Methane multi-gas testing, positive-pressure breathing, and rescue tripods.',
+            steps: [
+              'CRITICAL: NEVER enter an underground sewer, pit, or deep manhole without continuous 4-gas atmospheric testing (O2, H2S, CO, CH4).',
+              'Pre-Entry Ventilation: Force clean air through mechanical blower fans for AT LEAST 30 minutes before any authorized entry.',
+              'Mandatory PPE: Wear full-body harness tethered to mechanical rescue tripod with positive-pressure airline breathing apparatus.',
+              'If a co-worker collapses inside: NEVER jump in to assist without SCBA (causes immediate double fatality); winch them out using tripod hoist.',
+            ],
+          ),
+
+          _buildPlaybookCard(
+            context: context,
+            title: '🏢 High-Rise Fire Stairwell Egress & Smoke Barrier (NBC 2016)',
+            accentColor: const Color(0xFFEA580C),
+            summary: 'Pressurized escape routes, door closure rules, and smoke-free stair towers.',
+            steps: [
+              'In a building fire, EVACUATE ONLY VIA DESIGNATED FIRE ESCAPE STAIRWELLS; never use elevators/lifts.',
+              'Ensure all fire doors latch firmly shut behind you (maintains 50 Pa positive pressurization and blocks lethal smoke spread).',
+              'If smoke enters stairwell: Drop low beneath the thermal smoke layer and crawl on hands and knees with a damp cloth over nose/mouth.',
+              'Do not prop open fire doors with doorstops or wedges under any circumstances.',
+            ],
+          ),
+
+          _buildPlaybookCard(
+            context: context,
+            title: '🏗️ Earthquake Entombment & Geophone Tapping (NDRF USAR)',
+            accentColor: const Color(0xFF8B5CF6),
+            summary: '3-rhythmic metallic tapping protocol, shouting intervals, and conserving energy.',
+            steps: [
+              'If trapped under structural collapse rubble: Tap rhythmically 3 times on pipes or steel girders (e.g. TAP-TAP-TAP, pause 10s).',
+              'Seismic acoustic geophones can pinpoint rhythmic metallic tapping through 10+ meters of dense reinforced concrete.',
+              'Cover nose and mouth with cloth to avoid inhaling toxic silica dust and pulverized cement.',
+              'Do NOT scream or shout continuously (wastes precious oxygen and accelerates dehydration); shout only when rescue hailing is heard.',
+            ],
+          ),
+
+          _buildPlaybookCard(
+            context: context,
             title: '🎒 Emergency 72-Hour Go-Bag Checklist',
             accentColor: const Color(0xFF10B981),
             summary: 'Essential items needed for survival during emergency evacuation.',

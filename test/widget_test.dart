@@ -111,6 +111,26 @@ import 'package:lifesaver_app/models/metro_jet_fan_thrust.dart';
 import 'package:lifesaver_app/models/runaway_escape_ramp.dart';
 import 'package:lifesaver_app/models/community_water_coagulation.dart';
 import 'package:lifesaver_app/services/centennial_disaster_os_service.dart';
+import 'package:lifesaver_app/models/mangrove_bioshield_attenuation.dart';
+import 'package:lifesaver_app/models/chemical_bund_containment.dart';
+import 'package:lifesaver_app/models/confined_space_sewer_gas.dart';
+import 'package:lifesaver_app/models/rail_track_buckling.dart';
+import 'package:lifesaver_app/models/stairwell_pressurization.dart';
+import 'package:lifesaver_app/models/cloudburst_runoff_model.dart';
+import 'package:lifesaver_app/models/hermetic_grain_silo.dart';
+import 'package:lifesaver_app/models/offshore_esd_blowdown.dart';
+import 'package:lifesaver_app/models/mobile_ro_purification_vehicle.dart';
+import 'package:lifesaver_app/models/pavement_frost_heave.dart';
+import 'package:lifesaver_app/models/dust_explosion_venting.dart';
+import 'package:lifesaver_app/models/landslide_dam_breach.dart';
+import 'package:lifesaver_app/models/hospital_dialysis_autonomy.dart';
+import 'package:lifesaver_app/models/island_desalination_plant.dart';
+import 'package:lifesaver_app/models/pipeline_line_break_valve.dart';
+import 'package:lifesaver_app/models/facade_glass_thermal_stress.dart';
+import 'package:lifesaver_app/models/cattle_biogas_safety.dart';
+import 'package:lifesaver_app/models/blood_bank_cryo_autonomy.dart';
+import 'package:lifesaver_app/models/geophone_survivor_localization.dart';
+import 'package:lifesaver_app/services/national_disaster_nexus_service.dart';
 
 void main() {
   group('LifeSaver Domain & Logic Tests', () {
@@ -1554,6 +1574,309 @@ void main() {
       expect(charter.contains('NATIONAL DISASTER RESILIENCE OPERATING SYSTEM (NDROS 100)'), isTrue);
       expect(charter.contains('Total Specialized Disaster Resilience Domains: 100 / 100'), isTrue);
       expect(charter.contains('PM’s 10-POINT AGENDA ALIGNMENT:'), isTrue);
+    });
+
+    test('Loop 101: Evaluates Mangrove Bioshield Wave Damping & Inundation Reduction', () {
+      const mangrove = MangroveBioshieldAttenuation(
+        coastalStretchName: 'Sundarbans Biosphere Delta Reserve',
+        mangroveForestWidthMeters: 120.0,
+        treeDensityStemsPerSqMeter: 1.44, // sqrt(1.44) = 1.2 -> k = 0.018
+        incomingWaveHeightMeters: 4.0,
+        incomingSurgeVelocityMs: 3.5,
+      );
+      expect(mangrove.waveDampingCoefficient, closeTo(0.018, 0.001));
+      expect(mangrove.transmittedWaveHeightMeters, lessThan(1.0));
+      expect(mangrove.waveEnergyReductionPercent, greaterThan(90.0));
+      expect(mangrove.isEffectiveCoastalShield, isTrue);
+    });
+
+    test('Loop 102: Validates OISD-STD-118 Chemical Bund Dyke 110% Capacity Standard', () {
+      const bund = ChemicalBundContainmentAudit(
+        tankFarmFacilityName: 'IOCL Koyali Refinery Bulk Naphtha Terminal',
+        largestSingleTankVolumeKilolitres: 10000.0,
+        totalEnclosedTanksAggregateVolumeKilolitres: 25000.0,
+        bundInternalFloorAreaSqMeters: 8000.0,
+        bundWallHeightMeters: 1.6, // raw 12,800 m3 * 0.9 = 11,520 kL > 11,000 kL (110%)
+        isRainwaterDrainageSiphonValveClosed: true,
+        isImperviousPccLiningIntact: true,
+      );
+      expect(bund.mandatoryMinimumBundVolumeKilolitres, equals(11000.0));
+      expect(bund.effectiveBundCapacityKilolitres, equals(11520.0));
+      expect(bund.isBundCapacityCompliant, isTrue);
+      expect(bund.isUncontainedEnvironmentalSpillRisk, isFalse);
+    });
+
+    test('Loop 103: Validates CPHEEO / MS Act 2013 Confined Space Multi-Gas Sewer Safety', () {
+      const sewerChamber = ConfinedSpaceSewerGasTelemetry(
+        manholeChamberId: 'SEWER-MH-DELHI-44',
+        oxygenPercentageO2: 17.8, // Low O2
+        hydrogenSulfidePpmH2s: 24.0, // High H2S
+        carbonMonoxidePpmCo: 65.0,
+        methanePercentLelCh4: 12.0,
+        hasPositivePressureAirlineTrolley: true,
+        hasSafetyHarnessAndRescueTripod: true,
+      );
+      expect(sewerChamber.spaceSafetyStatus, equals(ConfinedSpaceSafetyStatus.lethalAsphyxiationDanger));
+      expect(sewerChamber.isEntryProhibited, isTrue);
+      expect(sewerChamber.isForcedAirPurgingMandated, isTrue);
+    });
+
+    test('Loop 104: Evaluates RDSO CWR Rail Track Buckling & Speed Restriction Caution', () {
+      const track = RailTrackBucklingAssessment(
+        railwayBlockSection: 'Northern Railway Kanpur-Prayagraj Triple Line (KM 214)',
+        stressFreeTemperatureTpCelsius: 38.0,
+        currentRailTemperatureTmCelsius: 65.0, // Delta T = 27°C (> 25°C critical)
+        trackCurvatureDegrees: 1.5,
+        ballastCushionDeficiencyMm: 40.0,
+        hasMissingTrackFastenersOrElasticClips: true,
+      );
+      expect(track.thermalRiseDeltaTCelsius, equals(27.0));
+      expect(track.longitudinalThermalCompressiveForceTonnes, closeTo(45.9, 0.1));
+      expect(track.thermalSafetyLevel, equals(RailThermalActionLevel.emergencySpeedRestriction));
+      expect(track.isSpeedRestrictionCautionOrderMandated, isTrue);
+    });
+
+    test('Loop 105: Validates NBC 2016 High-Rise Stairwell 50 Pa Positive Pressurization', () {
+      const stairwell = StairwellPressurizationAudit(
+        highRiseTowerName: 'World Trade Center Tower 1',
+        totalFloorsCount: 36,
+        measuredPressureDifferentialPascals: 52.0, // Compliant 45-60 Pa
+        doorOpeningForceNewtons: 110.0, // Safe <= 133 N
+        egressDoorAirVelocityMetersPerSec: 1.25, // Adequate >= 1.0 m/s
+        isFireSmokeDamperInterlocked: true,
+      );
+      expect(stairwell.isPressureDifferentialCompliant, isTrue);
+      expect(stairwell.isDoorOpeningForceSafe, isTrue);
+      expect(stairwell.isSmokeBarrierVelocityAdequate, isTrue);
+      expect(stairwell.isStaircaseSmokeContainmentCertified, isTrue);
+    });
+
+    test('Loop 106: Evaluates IMD / CWC Cloudburst Kirpich Runoff & Hydrograph Surge', () {
+      const catchment = CloudburstRunoffModel(
+        mountainCatchmentName: 'Mandakini River Kedarnath Catchment',
+        streamLengthKilometers: 8.5,
+        elevationDropMeters: 1400.0,
+        watershedAreaSqKm: 42.0,
+        cloudburstRainfallIntensityMmPerHour: 115.0, // > 100 mm/hr
+        catchmentRunoffCoefficient: 0.80,
+      );
+      expect(catchment.catchmentSlope, greaterThan(0.15));
+      expect(catchment.timeOfConcentrationMinutes, greaterThan(15.0));
+      expect(catchment.timeOfConcentrationMinutes, lessThan(45.0));
+      expect(catchment.peakDischargeCubicMetersPerSec, greaterThan(1000.0));
+      expect(catchment.isImdCloudburstCriterionSatisfied, isTrue);
+    });
+
+    test('Loop 107: Validates FCI / ICAR Hermetic Grain Silo Oxygen Depletion Quality', () {
+      const silo = HermeticGrainSiloTelemetry(
+        siloUnitId: 'FCI-HERMETIC-SILO-08',
+        villagePanchayatName: 'Samastipur Grain Buffer Hub',
+        storedGrainMassTonnes: 120.0,
+        grainMoisturePercentage: 11.2,
+        internalOxygenConcentrationPercent: 1.8, // < 3.0% O2 target
+        grainCoreTemperatureCelsius: 26.0,
+        isHermeticGasketSealIntact: true,
+      );
+      expect(silo.storageQuality, equals(GrainStoragePreservationQuality.primeNutritionalGrade));
+      expect(silo.insectMortalityRatePercent, equals(99.9));
+      expect(silo.isEmergencyGrainDryingMandated, isFalse);
+    });
+
+    test('Loop 108: Validates OISD-STD-189 Offshore Platform ESD 15-Minute Blowdown', () {
+      const platformEsd = OffshoreEsdBlowdownTelemetry(
+        platformId: 'Mumbai High North (MHN) Process Complex',
+        operatingPressureBar: 120.0,
+        hydrocarbonGasInventoryTonnes: 18.0,
+        isSubseaSafetyValveSssvClosed: true,
+        isEmergencyBlowdownValveEbdvOpened: true,
+        blowdownElapsedTimeMinutes: 11.5, // < 15 mins
+        currentPlatformPressureBar: 45.0, // 62.5% reduction > 50%
+      );
+      expect(platformEsd.pressureReductionPercent, equals(62.5));
+      expect(platformEsd.isDepressurizationBenchmarkMet, isTrue);
+      expect(platformEsd.isPlatformIsolationComplete, isTrue);
+      expect(platformEsd.isFlareOverloadThermalAlert, isFalse);
+    });
+
+    test('Loop 109: Evaluates Jal Jeevan Mission Mobile Disaster RO Purification Vehicle', () {
+      const roTruck = MobileRoPurificationVehicle(
+        vehicleRegistrationNumber: 'UP-16-NDMA-092',
+        activeDisasterZone: 'Gorakhpur Rapti River Flood Basin',
+        feedWaterTdsMgPerLitre: 1800.0,
+        rawWaterTurbidityNtu: 45.0,
+        permeateProductionRateLitresPerHour: 2000.0,
+        dieselGeneratorFuelRemainingLitres: 120.0,
+        fuelConsumptionLitresPerHour: 6.0,
+      );
+      expect(roTruck.generatorOperatingAutonomyHours, equals(20.0));
+      expect(roTruck.totalPotableWaterCapacityLitres, equals(40000.0));
+      expect(roTruck.servablePopulationPerDay, equals(2666));
+      expect(roTruck.isHighSalinityFeedCapable, isTrue);
+    });
+
+    test('Loop 110: Evaluates CRRI / IRC SP 89 High-Altitude Highway Pavement Frost Heave', () {
+      const borderRoad = PavementFrostHeaveAssessment(
+        highwaySectorPassName: 'Manali-Leh Highway Baralacha La Pass (4890m)',
+        airFreezingIndexDegreeDaysCelsius: 900.0, // sqrt(900) = 30 -> Z_f = 1.35m
+        subgradeFinesPercentagePassing75Micron: 22.0,
+        groundwaterDepthBelowPavementMeters: 1.2,
+        measuredFrostHeaveDisplacementMm: 65.0,
+        hasGeotextileCapillaryBreakLayer: false,
+      );
+      expect(borderRoad.estimatedFrostPenetrationDepthMeters, closeTo(1.35, 0.01));
+      expect(borderRoad.isHighlyFrostSusceptibleSoil, isTrue);
+      expect(borderRoad.isSevereFrostHeaveDisruption, isTrue);
+      expect(borderRoad.isSpringThawAxleLoadRestrictionMandated, isTrue);
+    });
+
+    test('Loop 111: Evaluates NFPA 68 Combustible Dust Explosion Venting Sizing', () {
+      const grainElevator = DustExplosionVentingDesign(
+        plantUnitTag: 'Roller Flour Mill Bag Filter Enclosure #4',
+        explosionClass: DustExplosionClass.stClass1, // Kst = 150 bar.m/s
+        enclosureVolumeCubicMeters: 45.0,
+        enclosurePredBar: 0.40,
+        providedReliefVentAreaSqMeters: 2.5,
+        hasFlamelessVentMeshAndSparkExtinguisher: true,
+      );
+      expect(grainElevator.requiredReliefVentAreaSqMeters, greaterThan(1.5));
+      expect(grainElevator.requiredReliefVentAreaSqMeters, lessThan(3.5));
+      expect(grainElevator.isExplosionVentingAdequate, isTrue);
+      expect(grainElevator.isFlamelessSuppressionMandated, isFalse);
+    });
+
+    test('Loop 112: Evaluates GSI / CWC Landslide Dam Outburst Flood (LDOF) Peak Outflow', () {
+      const landslideLake = LandslideDamBreachAssessment(
+        riverValleyName: 'Alaknanda Valley Rishiganga Confluence',
+        debrisBlockageHeightMeters: 45.0,
+        impoundedLakeVolumeMillionM3: 8.5,
+        inflowDischargeCusecs: 650.0,
+        distanceToDownstreamSettlementKm: 16.0,
+        isEmergencySpillwayChannelConstructed: false,
+      );
+      expect(landslideLake.estimatedPeakBreachOutflowCubicMetersPerSec, greaterThan(200.0));
+      expect(landslideLake.waveArrivalTimeMinutes, equals(40.0));
+      expect(landslideLake.isImminentBreachOvertoppingRisk, isTrue);
+      expect(landslideLake.isUrgentDownstreamEvacuationMandated, isTrue);
+    });
+
+    test('Loop 113: Validates Hospital Hemodialysis RO Water & DG Power Autonomy', () {
+      const dialysisUnit = HospitalDialysisAutonomyTelemetry(
+        hospitalHemodialysisUnitName: 'District Civil Hospital Renal Center',
+        activeDialysisStationsCount: 16,
+        ultrapureRoWaterStorageLitres: 35000.0,
+        feedWaterConsumptionPerStationLph: 40.0, // 640 L/hr -> ~54.6 hrs water
+        backupDgGeneratorFuelLitres: 1200.0,
+        fuelBurnRateLitresPerHour: 22.0, // ~54.5 hrs power
+      );
+      expect(dialysisUnit.totalWaterConsumptionLph, equals(640.0));
+      expect(dialysisUnit.effectiveDialysisAutonomyHours, greaterThan(50.0));
+      expect(dialysisUnit.isDisasterDialysisCompliant, isTrue);
+      expect(dialysisUnit.isCriticalDialysisDepletionAlert, isFalse);
+    });
+
+    test('Loop 114: Validates NIOT Low-Temperature Thermal Desalination (LTTD) Autonomy', () {
+      const islandLttd = IslandDesalinationPlantTelemetry(
+        islandLocationName: 'Kavaratti Island Desalination Facility',
+        surfaceSeaWaterTemperatureCelsius: 29.5,
+        deepSeaWaterTemperatureCelsius: 9.0, // Delta T = 20.5°C (> 15°C optimal)
+        plantDesignCapacityLitresPerDay: 100000.0,
+        currentIslandPopulation: 4500, // 90,000 LPD daily demand
+        islandFreshwaterStorageLitres: 650000.0, // ~7.2 days autonomy
+      );
+      expect(islandLttd.thermalGradientDeltaTCelsius, equals(20.5));
+      expect(islandLttd.isThermalGradientOptimal, isTrue);
+      expect(islandLttd.effectiveDailyFreshwaterOutputLitres, equals(100000.0));
+      expect(islandLttd.islandDrinkingWaterAutonomyDays, greaterThan(7.0));
+      expect(islandLttd.isIslandWaterCrisisAlert, isFalse);
+    });
+
+    test('Loop 115: Validates PNGRB / ASME Line Break Valve (LBV) Slam-Shut Rupture Trip', () {
+      const gasPipeline = PipelineLineBreakValveTelemetry(
+        pipelineSectionTag: 'Hazira-Vijaipur-Jagdishpur (HVJ) Gas Trunkline',
+        valveStationId: 'LBV-STATION-22',
+        operatingPressureBar: 85.0,
+        rateOfPressureDropBarPerMinute: 6.8, // > 5.0 bar/min critical trigger
+        lowPressureTripThresholdBar: 55.0,
+        currentMeasuredPressureBar: 48.0,
+        isEmergencyActuatorChargedWithGas: true,
+      );
+      expect(gasPipeline.valveState, equals(LineBreakValveState.automaticSlamShutClosed));
+      expect(gasPipeline.isPipelineRuptureIsolating, isTrue);
+      expect(gasPipeline.isActuatorArmedAndReady, isTrue);
+    });
+
+    test('Loop 116: Validates IS 16700 High-Rise Facade Glass Seismic Drift & Fallout', () {
+      const glassFacade = FacadeGlassSafetyAudit(
+        buildingTowerName: 'Financial Center Iconic Tower B',
+        measuredInterStoryDriftRatio: 0.0028, // Safe <= 0.004
+        glassThermalStressTempGradientC: 22.0,
+        isTemperedLaminatedSafetyGlass: true,
+        pedestrianCanopyProjectionMeters: 3.8, // Adequate >= 3.0m
+      );
+      expect(glassFacade.isSeismicDriftExceedanceRisk, isFalse);
+      expect(glassFacade.isThermalStressSpallingRisk, isFalse);
+      expect(glassFacade.isPedestrianProtectionCanopyAdequate, isTrue);
+      expect(glassFacade.isFacadeGlassFalloutCertified, isTrue);
+    });
+
+    test('Loop 117: Validates Village GOBARdhan Biogas Digester Flaring & Earthing', () {
+      const biogas = CattleBiogasDigesterSafety(
+        villagePlantId: 'GOBAR-ANAND-GUJ-102',
+        digesterGasPressureMillibar: 22.0,
+        methaneContentPercentCh4: 60.0,
+        hydrogenSulfidePpmH2s: 180.0,
+        isFlameArresterMeshCleanAndIntact: true,
+        earthingPitResistanceOhms: 3.2, // <= 5.0 Ohms
+      );
+      expect(biogas.isOverPressureFlareTripRequired, isFalse);
+      expect(biogas.isLightningEarthingCompliant, isTrue);
+      expect(biogas.isBioScrubberMediaRechargeRequired, isFalse);
+      expect(biogas.isDigesterOperationSafe, isTrue);
+    });
+
+    test('Loop 118: Validates MoHFW / NACO Blood Bank Cryopreservation & Power Holdover', () {
+      const bloodBank = BloodBankCryoAutonomyTelemetry(
+        bloodBankFacilityId: 'Apex Blood Center Regional Hub',
+        storedPrbcUnitsCount: 450,
+        storedFreshFrozenPlasmaUnitsCount: 600,
+        storedPlateletConcentrateUnitsCount: 150,
+        prbcRefrigeratorTempCelsius: 4.2, // Safe 2-6°C
+        ffpDeepFreezerTempCelsius: -42.0, // Safe <= -30°C
+        phaseChangeThermalHoldoverHours: 28.0,
+        isEmergencySolarBatteryBackingActive: true,
+      );
+      expect(bloodBank.totalBloodComponentsCount, equals(1200));
+      expect(bloodBank.isPrbcTemperatureCompliant, isTrue);
+      expect(bloodBank.isFfpTemperatureCompliant, isTrue);
+      expect(bloodBank.isThermalHoldoverDepletionAlert, isFalse);
+      expect(bloodBank.isBloodBankColdChainSecure, isTrue);
+    });
+
+    test('Loop 119: Validates NDRF USAR Seismic Geophone Acoustic Survivor Localization', () {
+      const geophone = GeophoneSurvivorLocalization(
+        collapseSiteId: 'USAR-SECTOR-4-COMMERCIAL-COLLAPSE',
+        sensor1SignalAmplitudeMicroVolts: 28.5,
+        sensor2SignalAmplitudeMicroVolts: 34.0,
+        sensor3SignalAmplitudeMicroVolts: 22.0,
+        detectedTappingFrequencyHz: 2.5, // 1-5 Hz human tapping pattern
+        timeDifferenceOfArrivalMs: 2.2,
+        concreteSeismicVelocityMetersPerSec: 3500.0,
+      );
+      expect(geophone.peakSignalAmplitudeMicroVolts, equals(34.0));
+      expect(geophone.estimatedSurvivorDistanceOffsetMeters, equals(7.7));
+      expect(geophone.isConsciousHumanTappingPattern, isTrue);
+      expect(geophone.isSearchCamProbeInsertionMandated, isTrue);
+    });
+
+    test('Loop 120: Validates Master 120-Domain National Disaster Command Nexus (NDROS 120)', () {
+      final nexus = NationalDisasterNexusService.getNexusMasterManifest();
+      expect(nexus.totalOperationalResilienceDomainsCount, equals(120));
+      expect(nexus.nationalCompositeResilienceIndexScore, greaterThan(99.0));
+      expect(nexus.apexPillarsAndProtocols.length, equals(6));
+      expect(nexus.strategicReadinessDirectives.length, equals(4));
+      final summary = nexus.generateNationalNexusSummary();
+      expect(summary.contains('NATIONAL DISASTER RESILIENCE COMMAND NEXUS (NDROS 120)'), isTrue);
+      expect(summary.contains('Total Fully-Integrated Specialized Domains: 120 / 120'), isTrue);
     });
   });
 }

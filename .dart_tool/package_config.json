@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "aqil_core",
-      "rootUri": "file:///D:/Program/Antigravity/aqil_core_v10",
+      "rootUri": "../packages/aqil_core_v10",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
