@@ -81,7 +81,7 @@
     },
     {
       "name": "code_assets",
-      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/code_assets-2.1.0",
+      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/code_assets-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "3.10"
     },
@@ -225,7 +225,7 @@
     },
     {
       "name": "hooks",
-      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/hooks-2.2.0",
+      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/hooks-2.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.10"
     },
@@ -255,7 +255,7 @@
     },
     {
       "name": "jni_flutter",
-      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/jni_flutter-1.0.3",
+      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/jni_flutter-1.0.4+1",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -327,7 +327,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.19.0",
+      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.18.3",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -339,7 +339,7 @@
     },
     {
       "name": "objective_c",
-      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/objective_c-9.6.2",
+      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/objective_c-9.5.0",
       "packageUri": "lib/",
       "languageVersion": "3.10"
     },
@@ -405,9 +405,9 @@
     },
     {
       "name": "petitparser",
-      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-7.1.0",
+      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/petitparser-7.0.2",
       "packageUri": "lib/",
-      "languageVersion": "3.13"
+      "languageVersion": "3.8"
     },
     {
       "name": "platform",
@@ -441,15 +441,15 @@
     },
     {
       "name": "record_use",
-      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/record_use-1.1.1",
+      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/record_use-0.6.0",
       "packageUri": "lib/",
       "languageVersion": "3.10"
     },
     {
       "name": "shared_preferences",
-      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.5.5",
+      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.5.6",
       "packageUri": "lib/",
-      "languageVersion": "3.9"
+      "languageVersion": "3.11"
     },
     {
       "name": "shared_preferences_android",
@@ -639,9 +639,9 @@
     },
     {
       "name": "xml",
-      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/xml-7.1.0",
+      "rootUri": "file:///C:/Users/Arun/AppData/Local/Pub/Cache/hosted/pub.dev/xml-7.0.1",
       "packageUri": "lib/",
-      "languageVersion": "3.13"
+      "languageVersion": "3.11"
     },
     {
       "name": "yaml",
