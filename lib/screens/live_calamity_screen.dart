@@ -81,9 +81,13 @@ class _LiveCalamityScreenState extends State<LiveCalamityScreen> with SingleTick
       appBar: AppBar(
         backgroundColor: const Color(0xFF0F172A),
         elevation: 0,
-        title: const Text(
-          'Live Calamity Feeds',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+        title: const FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Live Calamity Feeds',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          ),
         ),
         actions: [
           IconButton(
@@ -186,30 +190,34 @@ class _LiveCalamityScreenState extends State<LiveCalamityScreen> with SingleTick
             children: [
               // Magnitude Badge
               Container(
-                width: 52,
-                height: 52,
+                width: 54,
+                padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
                 decoration: BoxDecoration(
                   color: magColor.withValues(alpha: 0.18),
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(color: magColor),
                 ),
                 child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        event.magnitude.toStringAsFixed(1),
-                        style: TextStyle(
-                          color: magColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          event.magnitude.toStringAsFixed(1),
+                          style: TextStyle(
+                            color: magColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
-                      ),
-                      const Text(
-                        'MAG',
-                        style: TextStyle(color: Colors.white54, fontSize: 8, fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                        const Text(
+                          'MAG',
+                          style: TextStyle(color: Colors.white54, fontSize: 8, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

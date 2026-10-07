@@ -16,13 +16,13 @@ class ThreatGaugeCard extends StatelessWidget {
   Color _getThreatColor(ThreatLevel level) {
     switch (level) {
       case ThreatLevel.safe:
-        return const Color(0xFF10B981); // Emerald Green
+        return const Color(0xFF10B981); // Green
       case ThreatLevel.advisory:
-        return const Color(0xFFF59E0B); // Amber / Yellow
+        return const Color(0xFFF59E0B); // Amber
       case ThreatLevel.warning:
-        return const Color(0xFFF97316); // Bright Orange
+        return const Color(0xFFF97316); // Orange
       case ThreatLevel.criticalEmergency:
-        return const Color(0xFFEF4444); // Crimson Red
+        return const Color(0xFFEF4444); // Red
     }
   }
 
@@ -35,20 +35,7 @@ class ThreatGaugeCard extends StatelessWidget {
       case ThreatLevel.warning:
         return Icons.warning_amber_rounded;
       case ThreatLevel.criticalEmergency:
-        return Icons.dangerous_rounded;
-    }
-  }
-
-  String _formatResponseTime(Duration duration) {
-    if (duration == Duration.zero) return 'Immediate';
-    final hours = duration.inHours;
-    final minutes = duration.inMinutes.remainder(60);
-    if (hours > 0 && minutes > 0) {
-      return '$hours hr $minutes min';
-    } else if (hours > 0) {
-      return '$hours hours';
-    } else {
-      return '$minutes minutes';
+        return Icons.gpp_bad_rounded;
     }
   }
 
@@ -61,9 +48,9 @@ class ThreatGaugeCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: threatColor.withValues(alpha: 0.4),
+          color: threatColor.withValues(alpha: 0.5),
           width: 1.5,
         ),
         boxShadow: [
@@ -82,72 +69,70 @@ class ThreatGaugeCard extends StatelessWidget {
           children: [
             // Top Row: Status Chip & Action Icons
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: threatColor.withValues(alpha: 0.18),
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: threatColor.withValues(alpha: 0.6)),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(icon, color: threatColor, size: 18),
-                      const SizedBox(width: 6),
-                      Text(
-                        assessment.threatLevel.title,
-                        style: TextStyle(
-                          color: threatColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                          letterSpacing: 0.8,
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: threatColor.withValues(alpha: 0.18),
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(color: threatColor.withValues(alpha: 0.6)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(icon, color: threatColor, size: 18),
+                        const SizedBox(width: 6),
+                        Flexible(
+                          child: Text(
+                            assessment.threatLevel.title,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: threatColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              letterSpacing: 0.8,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      tooltip: 'Simulate Drill',
-                      icon: const Icon(Icons.tune_rounded, color: Colors.blueGrey, size: 20),
-                      onPressed: onSimulateDrill,
-                    ),
-                    IconButton(
-                      tooltip: 'Refresh Live Telemetry',
-                      icon: const Icon(Icons.refresh_rounded, color: Colors.white70, size: 20),
-                      onPressed: onRefresh,
-                    ),
-                  ],
+                IconButton(
+                  tooltip: 'Simulate Drill',
+                  icon: const Icon(Icons.tune_rounded, color: Colors.blueGrey, size: 20),
+                  onPressed: onSimulateDrill,
+                ),
+                IconButton(
+                  tooltip: 'Refresh Live Telemetry',
+                  icon: const Icon(Icons.refresh_rounded, color: Colors.white70, size: 20),
+                  onPressed: onRefresh,
                 ),
               ],
             ),
 
-            const SizedBox(height: 18),
+            const SizedBox(height: 20),
 
-            // Lead Time / Response Time Card
+            // Time to respond Banner
             Container(
-              padding: const EdgeInsets.all(16),
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               decoration: BoxDecoration(
                 color: const Color(0xFF0F172A),
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: Colors.white12),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white10),
               ),
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: threatColor.withValues(alpha: 0.15),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
-                      Icons.timer_rounded,
-                      color: threatColor,
-                      size: 28,
-                    ),
+                    child: Icon(Icons.timer_outlined, color: threatColor, size: 24),
                   ),
                   const SizedBox(width: 14),
                   Expanded(
@@ -155,22 +140,22 @@ class ThreatGaugeCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'ESTIMATED RESPONSE / EVACUATION WINDOW',
+                          'ESTIMATED TIME TO RESPOND',
                           style: TextStyle(
                             color: Colors.white54,
-                            fontSize: 10.5,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0.5,
+                            fontSize: 10,
+                            letterSpacing: 1.1,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 3),
                         Text(
-                          _formatResponseTime(assessment.estimatedResponseTime),
+                          assessment.formattedResponseTime,
                           style: TextStyle(
                             color: threatColor,
-                            fontSize: 22,
+                            fontSize: 20,
                             fontWeight: FontWeight.w900,
-                            letterSpacing: 0.2,
+                            letterSpacing: 0.3,
                           ),
                         ),
                       ],
@@ -202,9 +187,13 @@ class ThreatGaugeCard extends StatelessWidget {
               children: [
                 const Icon(Icons.sensors_rounded, size: 14, color: Colors.white38),
                 const SizedBox(width: 6),
-                Text(
-                  'Monitored Basin: ${assessment.nearestBasinName}',
-                  style: const TextStyle(color: Colors.white38, fontSize: 11.5),
+                Expanded(
+                  child: Text(
+                    'Monitored Basin: ${assessment.nearestBasinName}',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: const TextStyle(color: Colors.white38, fontSize: 11.5),
+                  ),
                 ),
               ],
             ),

@@ -113,9 +113,13 @@ class _SosActionScreenState extends State<SosActionScreen> {
                 children: [
                   const Icon(Icons.location_on_rounded, color: Color(0xFF38BDF8), size: 16),
                   const SizedBox(width: 6),
-                  Text(
-                    'Active Sector: ${widget.activeRegion.name} • $countryName',
-                    style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w600),
+                  Flexible(
+                    child: Text(
+                      'Active Sector: ${widget.activeRegion.name} • $countryName',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ],
               ),
@@ -245,16 +249,20 @@ class _SosActionScreenState extends State<SosActionScreen> {
 
             // Emergency Helplines Section
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  '$countryName Emergency Hotlines',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    '$countryName Emergency Hotlines',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
+                const SizedBox(width: 8),
                 const Text(
                   'Tap to Call',
                   style: TextStyle(color: Color(0xFF38BDF8), fontSize: 12),
@@ -271,50 +279,57 @@ class _SosActionScreenState extends State<SosActionScreen> {
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.white10),
                 ),
-                child: ListTile(
-                  leading: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFEF4444).withValues(alpha: 0.15),
-                      shape: BoxShape.circle,
+                child: Material(
+                  color: Colors.transparent,
+                  child: ListTile(
+                    leading: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFEF4444).withValues(alpha: 0.15),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(contact.icon, color: const Color(0xFFEF4444), size: 22),
                     ),
-                    child: Icon(contact.icon, color: const Color(0xFFEF4444), size: 22),
-                  ),
-                  title: Text(
-                    contact.title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13.5,
+                    title: Text(
+                      contact.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13.5,
+                      ),
                     ),
-                  ),
-                  subtitle: Text(
-                    contact.subtitle,
-                    style: const TextStyle(color: Colors.white54, fontSize: 11.5),
-                  ),
-                  trailing: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF10B981),
-                      borderRadius: BorderRadius.circular(20),
+                    subtitle: Text(
+                      contact.subtitle,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: const TextStyle(color: Colors.white54, fontSize: 11.5),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.phone, color: Colors.white, size: 14),
-                        const SizedBox(width: 4),
-                        Text(
-                          contact.number,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
+                    trailing: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF10B981),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.phone, color: Colors.white, size: 14),
+                          const SizedBox(width: 4),
+                          Text(
+                            contact.number,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    onTap: () => EmergencyService.makePhoneCall(contact.number),
                   ),
-                  onTap: () => EmergencyService.makePhoneCall(contact.number),
                 ),
               );
             }),

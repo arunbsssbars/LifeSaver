@@ -61,9 +61,13 @@ class _StatutoryAuditScreenState extends State<StatutoryAuditScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          'DDMA Statutory Disaster Audit',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
+        title: const FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'DDMA Statutory Disaster Audit',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
+          ),
         ),
         actions: [
           IconButton(
@@ -136,20 +140,31 @@ class _StatutoryAuditScreenState extends State<StatutoryAuditScreen> {
             const SizedBox(height: 20),
 
             // Export Button
-            ElevatedButton.icon(
+            ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF38BDF8),
                 foregroundColor: const Color(0xFF0F172A),
                 minimumSize: const Size(double.infinity, 48),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 elevation: 3,
               ),
-              icon: const Icon(Icons.description_rounded, size: 20),
-              label: const Text(
-                'Copy Official DDMA Statutory Report',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-              ),
               onPressed: _copyAuditReport,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.description_rounded, size: 20),
+                  SizedBox(width: 8),
+                  Flexible(
+                    child: Text(
+                      'Copy Official DDMA Statutory Report',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+                ],
+              ),
             ),
 
             const SizedBox(height: 24),
@@ -233,9 +248,12 @@ class _StatutoryAuditScreenState extends State<StatutoryAuditScreen> {
                     children: [
                       Icon(Icons.gavel_rounded, color: Color(0xFFF59E0B), size: 20),
                       SizedBox(width: 8),
-                      Text(
-                        'Priority Directives for DM / DEOC',
-                        style: TextStyle(color: Color(0xFFF59E0B), fontSize: 15, fontWeight: FontWeight.bold),
+                      Flexible(
+                        child: Text(
+                          'Priority Directives for DM / DEOC',
+                          style: TextStyle(color: Color(0xFFF59E0B), fontSize: 15, fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),

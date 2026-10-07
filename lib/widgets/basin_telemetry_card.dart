@@ -101,29 +101,31 @@ class BasinTelemetryCard extends StatelessWidget {
           // Multi-day trend summary
           if (flood.forecastDischarges.length >= 2) ...[
             Container(
+              width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
                 color: const Color(0xFF0F172A),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Row(
-                children: [
-                  const Text(
-                    'GloFAS Model: ',
-                    style: TextStyle(color: Colors.white54, fontSize: 11),
-                  ),
-                  Expanded(
-                    child: Text(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    const Text(
+                      'GloFAS Model: ',
+                      style: TextStyle(color: Colors.white54, fontSize: 11),
+                    ),
+                    Text(
                       'Surge ${flood.surgeRatio.toStringAsFixed(2)}x (${assessment.threatLevel.shortLabel})',
                       style: const TextStyle(
                         color: Color(0xFF38BDF8),
                         fontSize: 11.5,
                         fontWeight: FontWeight.w600,
                       ),
-                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

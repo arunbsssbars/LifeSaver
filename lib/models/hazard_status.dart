@@ -85,4 +85,13 @@ class HazardAssessment {
     required this.evaluatedAt,
     required this.nearestBasinName,
   });
+
+  String get formattedResponseTime {
+    if (estimatedResponseTime.inHours >= 1) {
+      final hrs = estimatedResponseTime.inHours;
+      final mins = estimatedResponseTime.inMinutes.remainder(60);
+      return mins > 0 ? '$hrs hrs $mins mins' : '$hrs hrs';
+    }
+    return '${estimatedResponseTime.inMinutes} mins';
+  }
 }

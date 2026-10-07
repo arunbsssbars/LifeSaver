@@ -111,12 +111,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Select Monitored River Basin',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
+                  const Flexible(
+                    child: Text(
+                      'Select Monitored River Basin',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   IconButton(
@@ -145,26 +149,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           color: isSelected ? const Color(0xFF38BDF8) : Colors.white10,
                         ),
                       ),
-                      child: ListTile(
-                        leading: Text(flag, style: const TextStyle(fontSize: 24)),
-                        title: Text(
-                          preset.name,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: ListTile(
+                          leading: Text(flag, style: const TextStyle(fontSize: 24)),
+                          title: Text(
+                            preset.name,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
+                          subtitle: Text(
+                            '${preset.stateOrDistrict} • ${preset.majorRiverBasin}',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: const TextStyle(color: Colors.white54, fontSize: 12),
+                          ),
+                          trailing: isSelected
+                              ? const Icon(Icons.check_circle_rounded, color: Color(0xFF38BDF8))
+                              : null,
+                          onTap: () {
+                            widget.onRegionChanged(preset);
+                            Navigator.pop(context);
+                          },
                         ),
-                        subtitle: Text(
-                          '${preset.stateOrDistrict} • ${preset.majorRiverBasin}',
-                          style: const TextStyle(color: Colors.white54, fontSize: 12),
-                        ),
-                        trailing: isSelected
-                            ? const Icon(Icons.check_circle_rounded, color: Color(0xFF38BDF8))
-                            : null,
-                        onTap: () {
-                          widget.onRegionChanged(preset);
-                          Navigator.pop(context);
-                        },
                       ),
                     );
                   },
@@ -188,7 +199,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               Icon(Icons.tune_rounded, color: Color(0xFF38BDF8)),
               SizedBox(width: 8),
-              Text('Simulate Disaster Drill', style: TextStyle(color: Colors.white, fontSize: 18)),
+              Flexible(
+                child: Text(
+                  'Simulate Disaster Drill',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ),
             ],
           ),
           content: const Text(
@@ -249,40 +267,40 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF0F172A),
         elevation: 0,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.shield_rounded, color: Color(0xFFEF4444), size: 20),
-                const SizedBox(width: 8),
-                const Text(
-                  'LifeSaver',
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.shield_rounded, color: Color(0xFFEF4444), size: 20),
+              const SizedBox(width: 8),
+              const Text(
+                'LifeSaver',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.5,
+                ),
+              ),
+              const SizedBox(width: 6),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF38BDF8).withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: const Text(
+                  'EARLY WARNING',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 0.5,
+                    color: Color(0xFF38BDF8),
+                    fontSize: 9.5,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(width: 6),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF38BDF8).withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: const Text(
-                    'EARLY WARNING',
-                    style: TextStyle(
-                      color: Color(0xFF38BDF8),
-                      fontSize: 9.5,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
         actions: [
           IconButton(
@@ -355,6 +373,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           children: [
                             Text(
                               widget.activeRegion.name,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -363,6 +383,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             Text(
                               '${widget.activeRegion.stateOrDistrict}, ${widget.activeRegion.country}',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                               style: const TextStyle(color: Colors.white54, fontSize: 12),
                             ),
                           ],
@@ -433,71 +455,82 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(height: 20),
 
               // Quick SOS Panic Banner
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFDC2626), Color(0xFF991B1B)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+              GestureDetector(
+                onTap: widget.onNavigateToSos,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFFDC2626), Color(0xFF991B1B)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.redAccent.withValues(alpha: 0.3),
+                        blurRadius: 15,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.redAccent.withValues(alpha: 0.3),
-                      blurRadius: 15,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: const BoxDecoration(
-                        color: Colors.white24,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.emergency_share_rounded, color: Colors.white, size: 30),
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'EMERGENCY SOS & SIREN',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.5,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            widget.activeRegion.countryCode == 'NP'
-                                ? 'Hotlines: 1155 (Flood) • 1114 (APF)'
-                                : 'Hotlines: 112 (National) • 1078 (NDRF)',
-                            style: const TextStyle(color: Colors.white70, fontSize: 11.5),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: const Color(0xFFDC2626),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: const BoxDecoration(
+                          color: Colors.white24,
+                          shape: BoxShape.circle,
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                        child: const Icon(Icons.emergency_share_rounded, color: Colors.white, size: 26),
                       ),
-                      onPressed: widget.onNavigateToSos,
-                      child: const Text('ACTIVATE', style: TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                  ],
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'EMERGENCY SOS & SIREN',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              widget.activeRegion.countryCode == 'NP'
+                                  ? 'Hotlines: 1155 (Flood) • 1114 (APF)'
+                                  : 'Hotlines: 112 (National) • 1078 (NDRF)',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: const TextStyle(color: Colors.white70, fontSize: 11),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: const Color(0xFFDC2626),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          ),
+                          onPressed: widget.onNavigateToSos,
+                          child: const Text('ACTIVATE', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 30),

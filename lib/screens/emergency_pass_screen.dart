@@ -68,9 +68,13 @@ class _EmergencyPassScreenState extends State<EmergencyPassScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          'NDMA Emergency Survival Pass',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
+        title: const FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'NDMA Emergency Survival Pass',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
+          ),
         ),
         actions: [
           IconButton(
@@ -113,23 +117,31 @@ class _EmergencyPassScreenState extends State<EmergencyPassScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 8,
+                    runSpacing: 6,
                     children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.badge_rounded, color: Color(0xFF38BDF8), size: 22),
-                          const SizedBox(width: 8),
-                          Text(
-                            'NDMA FAMILY DISASTER PASS',
-                            style: TextStyle(
-                              color: const Color(0xFF38BDF8).withValues(alpha: 0.9),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.1,
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.badge_rounded, color: Color(0xFF38BDF8), size: 22),
+                            const SizedBox(width: 8),
+                            Text(
+                              'NDMA FAMILY DISASTER PASS',
+                              style: TextStyle(
+                                color: const Color(0xFF38BDF8).withValues(alpha: 0.9),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.1,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -157,11 +169,13 @@ class _EmergencyPassScreenState extends State<EmergencyPassScreen> {
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     'Family Size: ${_profile.familyMemberCount} Persons • ID: XXXX-XXXX-${_profile.govtIdLastFourDigits}',
                     style: const TextStyle(color: Colors.white70, fontSize: 13),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const Divider(color: Colors.white12, height: 24),
                   Row(
@@ -214,18 +228,14 @@ class _EmergencyPassScreenState extends State<EmergencyPassScreen> {
             const SizedBox(height: 20),
 
             // SOS Broadcast Action Button
-            ElevatedButton.icon(
+            ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFEF4444),
                 foregroundColor: Colors.white,
                 minimumSize: const Size(double.infinity, 50),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                 elevation: 4,
-              ),
-              icon: const Icon(Icons.send_rounded, size: 20),
-              label: const Text(
-                'Copy Instant GPS SOS Broadcast Text',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
               onPressed: () {
                 final sosMsg = _profile.generateDistressBroadcast(
@@ -235,26 +245,44 @@ class _EmergencyPassScreenState extends State<EmergencyPassScreen> {
                 );
                 _copyToClipboard(sosMsg, 'Instant GPS SOS text copied to clipboard!');
               },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.send_rounded, size: 20),
+                  SizedBox(width: 8),
+                  Flexible(
+                    child: Text(
+                      'Copy Instant GPS SOS Broadcast Text',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+                ],
+              ),
             ),
 
             const SizedBox(height: 24),
 
             // NDMA 72-Hour Survival Kit Section
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1E293B),
+            Material(
+              color: const Color(0xFF1E293B),
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white10),
+                side: const BorderSide(color: Colors.white10),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Expanded(
-                        child: Column(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 8,
+                      runSpacing: 6,
+                      children: [
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
@@ -268,84 +296,95 @@ class _EmergencyPassScreenState extends State<EmergencyPassScreen> {
                             ),
                           ],
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: readinessColor.withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: readinessColor),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: readinessColor.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: readinessColor),
+                          ),
+                          child: Text(
+                            '${readiness.toStringAsFixed(0)}% Ready',
+                            style: TextStyle(color: readinessColor, fontWeight: FontWeight.bold, fontSize: 13),
+                          ),
                         ),
-                        child: Text(
-                          '${readiness.toStringAsFixed(0)}% Ready',
-                          style: TextStyle(color: readinessColor, fontWeight: FontWeight.bold, fontSize: 13),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: LinearProgressIndicator(
-                      value: readiness / 100,
-                      backgroundColor: Colors.white10,
-                      valueColor: AlwaysStoppedAnimation<Color>(readinessColor),
-                      minHeight: 8,
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 14),
-                  ..._kitState.entries.map((entry) {
-                    return CheckboxListTile(
-                      dense: true,
-                      contentPadding: EdgeInsets.zero,
-                      activeColor: const Color(0xFF10B981),
-                      title: Text(
-                        entry.key,
-                        style: TextStyle(
-                          color: entry.value ? Colors.white : Colors.white60,
-                          fontSize: 13,
-                          decoration: entry.value ? null : TextDecoration.none,
-                        ),
+                    const SizedBox(height: 12),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: LinearProgressIndicator(
+                        value: readiness / 100,
+                        backgroundColor: Colors.white10,
+                        valueColor: AlwaysStoppedAnimation<Color>(readinessColor),
+                        minHeight: 8,
                       ),
-                      value: entry.value,
-                      onChanged: (val) {
-                        setState(() {
-                          _kitState[entry.key] = val ?? false;
-                        });
-                      },
-                    );
-                  }),
-                ],
+                    ),
+                    const SizedBox(height: 14),
+                    ..._kitState.entries.map((entry) {
+                      return Material(
+                        color: Colors.transparent,
+                        child: CheckboxListTile(
+                          dense: true,
+                          contentPadding: EdgeInsets.zero,
+                          activeColor: const Color(0xFF10B981),
+                          title: Text(
+                            entry.key,
+                            style: TextStyle(
+                              color: entry.value ? Colors.white : Colors.white60,
+                              fontSize: 13,
+                              decoration: entry.value ? null : TextDecoration.none,
+                            ),
+                          ),
+                          value: entry.value,
+                          onChanged: (val) {
+                            setState(() {
+                              _kitState[entry.key] = val ?? false;
+                            });
+                          },
+                        ),
+                      );
+                    }),
+                  ],
+                ),
               ),
             ),
 
             const SizedBox(height: 24),
 
             // Multi-lingual Disaster Triage Cards
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 6,
               children: [
                 const Text(
                   'Multi-lingual SOS Phrases',
                   style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                DropdownButton<String>(
-                  value: _selectedLanguageCode,
-                  dropdownColor: const Color(0xFF1E293B),
-                  style: const TextStyle(color: Color(0xFF38BDF8), fontWeight: FontWeight.bold, fontSize: 13),
-                  underline: const SizedBox(),
-                  icon: const Icon(Icons.arrow_drop_down, color: Color(0xFF38BDF8)),
-                  items: _languages.map((l) {
-                    return DropdownMenuItem<String>(
-                      value: l['code'],
-                      child: Text(l['label']!),
-                    );
-                  }).toList(),
-                  onChanged: (val) {
-                    if (val != null) {
-                      setState(() => _selectedLanguageCode = val);
-                    }
-                  },
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: _selectedLanguageCode,
+                      isDense: true,
+                      dropdownColor: const Color(0xFF1E293B),
+                      style: const TextStyle(color: Color(0xFF38BDF8), fontWeight: FontWeight.bold, fontSize: 13),
+                      icon: const Icon(Icons.arrow_drop_down, color: Color(0xFF38BDF8)),
+                      items: _languages.map((l) {
+                        return DropdownMenuItem<String>(
+                          value: l['code'],
+                          child: Text(l['label']!),
+                        );
+                      }).toList(),
+                      onChanged: (val) {
+                        if (val != null) {
+                          setState(() => _selectedLanguageCode = val);
+                        }
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -372,17 +411,21 @@ class _EmergencyPassScreenState extends State<EmergencyPassScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF38BDF8).withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            phrase.category.toUpperCase(),
-                            style: const TextStyle(color: Color(0xFF38BDF8), fontSize: 10, fontWeight: FontWeight.bold),
+                        Flexible(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF38BDF8).withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              phrase.category.toUpperCase(),
+                              style: const TextStyle(color: Color(0xFF38BDF8), fontSize: 10, fontWeight: FontWeight.bold),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
+                        const SizedBox(width: 8),
                         IconButton(
                           iconSize: 18,
                           padding: EdgeInsets.zero,

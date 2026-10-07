@@ -155,18 +155,22 @@ class _InteractiveMapScreenState extends State<InteractiveMapScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF0F172A),
         elevation: 0,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Interactive Basin & Hazard Map',
-              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              '${widget.activeRegion.name} (${widget.activeRegion.majorRiverBasin})',
-              style: const TextStyle(color: Color(0xFF38BDF8), fontSize: 11.5),
-            ),
-          ],
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Interactive Basin & Hazard Map',
+                style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '${widget.activeRegion.name} (${widget.activeRegion.majorRiverBasin})',
+                style: const TextStyle(color: Color(0xFF38BDF8), fontSize: 11.5),
+              ),
+            ],
+          ),
         ),
         actions: [
           IconButton(

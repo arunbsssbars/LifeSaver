@@ -127,9 +127,11 @@ class CwcGaugeCard extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          // Level Markers Row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // Level Markers
+          Wrap(
+            spacing: 10,
+            runSpacing: 4,
+            alignment: WrapAlignment.spaceBetween,
             children: [
               Text(
                 'WL: ${station.warningLevelMeters.toStringAsFixed(1)}m',
