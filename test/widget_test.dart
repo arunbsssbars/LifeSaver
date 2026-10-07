@@ -149,6 +149,26 @@ import 'package:lifesaver_app/models/ash_dyke_stability_monitoring.dart';
 import 'package:lifesaver_app/models/tuned_liquid_damper_sloshing.dart';
 import 'package:lifesaver_app/models/tih_protective_action_distance.dart';
 import 'package:lifesaver_app/models/disaster_cchp_trigeneration.dart';
+import 'package:lifesaver_app/models/borewell_rescue_telemetry.dart';
+import 'package:lifesaver_app/models/submerged_vehicle_escape.dart';
+import 'package:lifesaver_app/models/rip_current_escape.dart';
+import 'package:lifesaver_app/models/crushed_vehicle_extrication.dart';
+import 'package:lifesaver_app/models/lightning_field_safety.dart';
+import 'package:lifesaver_app/models/domestic_lpg_leak_safety.dart';
+import 'package:lifesaver_app/models/avalanche_burial_search.dart';
+import 'package:lifesaver_app/models/cave_flood_barometry.dart';
+import 'package:lifesaver_app/models/high_voltage_step_potential.dart';
+import 'package:lifesaver_app/models/elevator_shaft_rescue.dart';
+import 'package:lifesaver_app/models/grain_silo_engulfment.dart';
+import 'package:lifesaver_app/models/snakebite_pressure_immobilization.dart';
+import 'package:lifesaver_app/models/ammonia_leak_scrubbing.dart';
+import 'package:lifesaver_app/models/stampede_crush_defense.dart';
+import 'package:lifesaver_app/models/quicksand_buoyancy_escape.dart';
+import 'package:lifesaver_app/models/ev_battery_thermal_runaway.dart';
+import 'package:lifesaver_app/models/high_rise_rope_rigging.dart';
+import 'package:lifesaver_app/models/exertional_heatstroke_cwi.dart';
+import 'package:lifesaver_app/models/drowning_submersion_cpr.dart';
+import 'package:lifesaver_app/models/national_disaster_nexus_160.dart';
 import 'package:lifesaver_app/services/national_disaster_nexus_service.dart';
 
 void main() {
@@ -2249,7 +2269,7 @@ void main() {
     });
 
     test('Loop 140: Validates Master 140-Domain National Disaster Command Nexus (NDROS 140)', () {
-      final nexus = NationalDisasterNexusService.getNexusMasterManifest();
+      final nexus = NationalDisasterNexusService.getNexusMasterManifest140();
       expect(nexus.totalOperationalResilienceDomainsCount, equals(140));
       expect(nexus.nationalCompositeResilienceIndexScore, greaterThan(99.0));
       expect(nexus.apexPillarsAndProtocols.length, equals(6));
@@ -2257,6 +2277,304 @@ void main() {
       final summary = nexus.generateNationalNexusSummary();
       expect(summary.contains('NATIONAL DISASTER RESILIENCE COMMAND NEXUS (NDROS 140)'), isTrue);
       expect(summary.contains('Total Fully-Integrated Specialized Domains: 140 / 140'), isTrue);
+    });
+
+    test('Loop 141: Validates NDMA / NDRF National Borewell Rescue Telemetry & Life-Support', () {
+      const telemetry = BorewellRescueTelemetry(
+        boreholeDepthMeters: 45.0,
+        casualtyTrappedDepthMeters: 28.0,
+        casingDiameterInches: 10.0,
+        oxygenFlowRateLitersPerMin: 18.0,
+        ambientTemperatureCelsius: 29.0,
+        parallelPitDepthMeters: 22.0,
+        isAudioVisualContactEstablished: true,
+        hasPneumaticCapsuleDeployed: false,
+      );
+      expect(telemetry.isOxygenSupplyAdequate, isTrue);
+      expect(telemetry.remainingParallelPitMeters, equals(6.0));
+      expect(telemetry.horizontalTunnelDistanceMeters, equals(2.5));
+      expect(telemetry.rescueRiskTier.contains('HIGH AMBER'), isTrue);
+      expect(telemetry.incidentCommandDirective.contains('6.0m remaining'), isTrue);
+    });
+
+    test('Loop 142: Validates Submerged Vehicle Escape & Hydrostatic Pressure Equalization', () {
+      const escape = SubmergedVehicleEscape(
+        waterDepthMeters: 2.5,
+        cabinSubmergedPercentage: 40.0,
+        hasSpringLoadedWindowPunch: true,
+        occupantCount: 4,
+        areSeatbeltsReleased: true,
+        isElectricalPowerFunctional: true,
+      );
+      expect(escape.doorResistingForceNewtons, greaterThan(350.0));
+      expect(escape.canOpenDoorDirectly, isFalse);
+      expect(escape.goldenEscapeWindowSeconds, equals(30));
+      expect(escape.immediateEscapeAction.contains('spring-loaded punch'), isTrue);
+    });
+
+    test('Loop 143: Validates INCOIS Rip Current Escape & Surf Zone Hydrodynamics', () {
+      const rip = RipCurrentEscape(
+        ripCurrentSpeedMps: 2.2,
+        ripChannelWidthMeters: 24.0,
+        swimmerVelocityMps: 0.8,
+        isTreadingWaterOrFloating: true,
+        distanceOffshoreMeters: 45.0,
+      );
+      expect(rip.isDirectSwimToShoreImpossible, isTrue);
+      expect(rip.recommendedEscapeSwimAngleDegrees, equals(90.0));
+      expect(rip.timeToEscapeChannelSeconds, equals(15.0));
+      expect(rip.survivalProtocol.contains('DO NOT SWIM AGAINST CURRENT'), isTrue);
+      expect(rip.emergencySignalInstruction.contains('Wave one arm'), isTrue);
+    });
+
+    test('Loop 144: Validates Tree Fall & Crushed Vehicle Extrication with Crush Syndrome Telemetry', () {
+      const extrication = CrushedVehicleExtrication(
+        estimatedDebrisWeightTons: 4.5,
+        compressionDurationMinutes: 35.0,
+        hydraulicSpreaderCapacityKn: 450.0,
+        trappedCasualtyCount: 2,
+        hasPreReleaseIvSalineInitiated: false,
+        isChassisCribbingStabilized: true,
+      );
+      expect(extrication.requiredLiftingForceKn, greaterThan(60.0));
+      expect(extrication.isHydraulicCapacityAdequate, isTrue);
+      expect(extrication.isCrushSyndromeRiskHigh, isTrue);
+      expect(extrication.medicalExtricationMandate.contains('DO NOT LIFT WEIGHT'), isTrue);
+      expect(extrication.tacticalStabilizationProtocol.contains('Proceed with hydraulic'), isTrue);
+    });
+
+    test('Loop 145: Validates IMD / Damini Open-Field Lightning Crouch & Reverse Triage', () {
+      const lightning = LightningFieldSafety(
+        distanceToTallObjectMeters: 15.0,
+        heightOfTallObjectMeters: 20.0,
+        flashToBangIntervalSeconds: 12.0,
+        isWorkerInOpenAgriculturalField: true,
+        isTouchingMetalEquipment: false,
+        victimCardiacArrestCount: 1,
+      );
+      expect(lightning.estimatedStormDistanceKm, closeTo(4.08, 0.1));
+      expect(lightning.isImmediateShelterMandatory, isTrue);
+      expect(lightning.isSideFlashDangerPresent, isTrue);
+      expect(lightning.reverseTriageProtocol.contains('REVERSE TRIAGE APPLIED'), isTrue);
+      expect(lightning.tacticalFieldPosture.contains('ADOPT LIGHTNING CROUCH'), isTrue);
+    });
+
+    test('Loop 146: Validates Domestic Kitchen LPG Cylinder Fire Wet-Blanket Smothering', () {
+      const lpg = DomesticLpgLeakSafety(
+        estimatedLeakVolumePercent: 3.5,
+        isRegulatorValveOnFire: true,
+        areElectricalSwitchesTouched: false,
+        isExhaustFanTurnedOn: false,
+        roomFloorAreaM2: 12.0,
+      );
+      expect(lpg.isExplosiveMixturePresent, isTrue);
+      expect(lpg.isCylinderBleveRiskHigh, isTrue);
+      expect(lpg.primaryTacticalResponse.contains('dripping wet in water'), isTrue);
+      expect(lpg.criticalSafetyProhibition.contains('Never light a match'), isTrue);
+    });
+
+    test('Loop 147: Validates DGRE / SASE Avalanche 457 kHz Search & V-Shaped Conveyor Shoveling', () {
+      const avalanche = AvalancheBurialSearch(
+        burialDepthMeters: 1.8,
+        burialDurationMinutes: 12.0,
+        isTransceiverBeacon457KhzActive: true,
+        isAirPocketConfirmed: true,
+        availableRescuerCount: 4,
+      );
+      expect(avalanche.estimatedSurvivalProbabilityPercent, equals(93.0));
+      expect(avalanche.estimatedSnowExcavationVolumeM3, greaterThan(5.0));
+      expect(avalanche.searchPhaseGuidance.contains('457 kHz'), isTrue);
+      expect(avalanche.strategicShovelingMethod.contains('V-SHAPED SNOW CONVEYOR'), isTrue);
+    });
+
+    test('Loop 148: Validates Flooded Cave / Tunnel Air Pocket Boyle\'s Law Barometry & CO2', () {
+      const cave = CaveFloodBarometry(
+        chamberVolumeM3: 150.0,
+        externalWaterHeadMeters: 10.0,
+        trappedPersonCount: 5,
+        trappedHoursElapsed: 18.0,
+        co2ConcentrationPercent: 1.8,
+      );
+      expect(cave.compressedAirPocketVolumeM3, equals(75.0));
+      expect(cave.isCo2ToxicityImminent, isFalse);
+      expect(cave.estimatedRemainingHours, greaterThan(0.0));
+      expect(cave.tacticalLifeSupportDirective.contains('REST & CONSERVE'), isTrue);
+      expect(cave.sumpDivingExtractionPlan.contains('9mm static guideline'), isTrue);
+    });
+
+    test('Loop 149: Validates CEA Snapped High-Voltage Power Line Step-Potential & Bunny Hop', () {
+      const wire = HighVoltageStepPotential(
+        lineVoltageKv: 33.0,
+        distanceToFallenConductorMeters: 6.0,
+        isGroundWetOrFlooded: true,
+        rescuerFootSeparationMeters: 0.8,
+      );
+      expect(wire.minimumSafeRadiusMeters, equals(15.0));
+      expect(wire.isInsideDangerZone, isTrue);
+      expect(wire.estimatedStepPotentialVolts, greaterThan(1000.0));
+      expect(wire.tacticalEscapeGait.contains('BUNNY-HOP'), isTrue);
+      expect(wire.trappedVehicleSafetyRule.contains('STAY INSIDE'), isTrue);
+    });
+
+    test('Loop 150: Validates BIS IS 14665 High-Rise Elevator Shaft Entrapment Governor Brake & Stance', () {
+      const elevator = ElevatorShaftRescue(
+        stalledFloorLevel: 14,
+        totalBuildingFloors: 30,
+        trappedOccupantCount: 6,
+        isSmokePresentInShaft: false,
+        isGovernorSafetyBrakeEngaged: true,
+        isLandingDoorInterlockAligned: true,
+      );
+      expect(elevator.passengerSurvivalPosture.contains('bent knees'), isTrue);
+      expect(elevator.tacticalExtractionProtocol.contains('lunar key'), isTrue);
+      expect(elevator.trappedPassengerProhibition.contains('Never attempt to climb out'), isTrue);
+    });
+
+    test('Loop 151: Validates Grain Silo Engulfment Rescue Cofferdam Shield & Vacuum Extraction', () {
+      const silo = GrainSiloEngulfment(
+        victimSubmergedDepthMeters: 0.9,
+        grainType: 'Wheat',
+        isDischargeAugerTurnedOff: true,
+        hasRescueCofferdamShieldInserted: false,
+        victimAge: 38,
+      );
+      expect(silo.estimatedFrictionForceNewtons, equals(3500.0));
+      expect(silo.canPullDirectlyWithoutCofferdam, isFalse);
+      expect(silo.tacticalExtricationSequence.contains('aluminum grain rescue shield'), isTrue);
+      expect(silo.airwayProtectionDirective.contains('particulate respirator'), isTrue);
+    });
+
+    test('Loop 152: Validates MoHFW / WHO Snakebite Pressure Immobilization (PIT) & 20WBCT', () {
+      const snake = SnakebitePressureImmobilization(
+        snakeType: SnakeType.bigFourElapid,
+        biteLimbLocation: 'Foot',
+        minutesSinceBite: 45.0,
+        has20MinuteClottingFailure: false,
+        isPtosisOrParalysisPresent: true,
+        isBiteSiteWashedOrCut: false,
+      );
+      expect(snake.recommendedAsvInitialVials, equals(10));
+      expect(snake.firstAidTacticalProtocol.contains('NEUROTOXIC ELAPID'), isTrue);
+      expect(snake.firstAidTacticalProtocol.contains('50-70 mmHg'), isTrue);
+      expect(snake.criticalProhibitions.length, equals(5));
+      expect(snake.criticalProhibitions.first.contains('NEVER cut'), isTrue);
+    });
+
+    test('Loop 153: Validates Industrial Ammonia (NH3) Valve Rupture Water Fog Knockdown Scrubbing', () {
+      const ammonia = AmmoniaLeakScrubbing(
+        leakRateKgPerSec: 2.0,
+        windSpeedMps: 2.5,
+        distanceDownwindMeters: 80.0,
+        isWaterCurtainActivated: true,
+        waterFogFlowLpm: 600.0,
+      );
+      expect(ammonia.estimatedVaporKnockdownEfficiencyPercent, equals(85.0));
+      expect(ammonia.rawConcentrationPpm, greaterThan(500.0));
+      expect(ammonia.netAmbientPpm, lessThan(ammonia.rawConcentrationPpm));
+      expect(ammonia.evacuationDirectionDirective.contains('PERPENDICULAR'), isTrue);
+      expect(ammonia.citizenProtectionDirective.contains('dilute vinegar'), isTrue);
+    });
+
+    test('Loop 154: Validates NDMA Crowd Surge Traumatic Asphyxia Boxer Defensive Stance', () {
+      const crowd = StampedeCrushDefense(
+        crowdDensityPersonsPerM2: 6.5,
+        crowdSpeedMps: 0.3,
+        isPersonKnockedToGround: false,
+        hasBoxerStanceAdopted: true,
+        bottleneckWidthMeters: 2.2,
+      );
+      expect(crowd.estimatedCompressiveForceNewtons, greaterThan(3000.0));
+      expect(crowd.asphyxiaRiskTier.contains('CRITICAL RED'), isTrue);
+      expect(crowd.standingDefensivePosture.contains('BOXER STANCE'), isTrue);
+      expect(crowd.flowNavigationDirective.contains('DO NOT FIGHT AGAINST THE FLOW'), isTrue);
+    });
+
+    test('Loop 155: Validates Coastal Mudflat & Quicksand Supine Back-Float Thixotropic Release', () {
+      const quicksand = QuicksandBuoyancyEscape(
+        submergedDepthMeters: 0.8,
+        timeToHighTideMinutes: 45.0,
+        isThrashingOrJerkingLegs: false,
+        isLyingBackSupine: true,
+      );
+      expect(quicksand.verticalExtractionSuctionForceNewtons, equals(10000.0));
+      expect(quicksand.tacticalEscapeProtocol.contains('wiggle legs in slow tiny circles'), isTrue);
+      expect(quicksand.tidalThreatAssessment.contains('Moderate tidal window'), isTrue);
+    });
+
+    test('Loop 156: Validates ARAI / NFPA 855 Electric Vehicle (EV) Li-ion Thermal Runaway Deluge', () {
+      const ev = EvBatteryThermalRunaway(
+        batteryTemperatureCelsius: 95.0,
+        temperatureRateOfRiseCPerMin: 18.0,
+        isVentingWhiteToxicSmoke: true,
+        isHighVoltageDisconnectPulled: false,
+        continuousDelugeWaterAvailableLiters: 12000.0,
+      );
+      expect(ev.isThermalRunawayActive, isTrue);
+      expect(ev.isDelugeWaterSupplyAdequate, isTrue);
+      expect(ev.safetyStandoffPerimeterMeters, equals(25.0));
+      expect(ev.tacticalResponseProtocol.contains('Hydrofluoric Acid'), isTrue);
+      expect(ev.postFireReignitionWarning.contains('48 hours'), isTrue);
+    });
+
+    test('Loop 157: Validates High-Rise Balcony Rope Rescue 3:1 Z-Rig Mechanical Advantage Pick-off', () {
+      const rope = HighRiseRopeRigging(
+        ledgeHeightMeters: 38.0,
+        strandedSurvivorCount: 2,
+        mainRopeBreakingStrengthKn: 32.0,
+        mechanicalAdvantageRatio: 3,
+        isEdgeRollerPadDeployed: true,
+        isTwoPointBombproofAnchorRigged: true,
+      );
+      expect(rope.isRopeSafetyFactorAdequate, isTrue);
+      expect(rope.estimatedRescuerHaulForceNewtons, closeTo(533.33, 1.0));
+      expect(rope.tacticalRiggingDirective.contains('3:1 Z-Rig'), isTrue);
+      expect(rope.survivorLedgeGuidance.contains('Sit down against building wall'), isTrue);
+    });
+
+    test('Loop 158: Validates NDMA / WMS Exertional Heatstroke Rapid Cold Water Immersion (CWI)', () {
+      const heatstroke = ExertionalHeatstrokeCwi(
+        coreBodyTemperatureCelsius: 41.2,
+        hasCentralNervousSystemDysfunction: true,
+        minutesUntilCoolingInitiated: 5.0,
+        isIceWaterBathAvailable: true,
+        waterTubTemperatureCelsius: 8.0,
+      );
+      expect(heatstroke.isTrueHeatstrokeEmergency, isTrue);
+      expect(heatstroke.estimatedCoolingRateCPerMin, equals(0.20));
+      expect(heatstroke.estimatedCoolingDurationMinutes, closeTo(13.0, 0.5));
+      expect(heatstroke.clinicalResuscitationProtocol.contains('COOL FIRST, TRANSPORT SECOND'), isTrue);
+      expect(heatstroke.clinicalContraindicationWarning.contains('Paracetamol'), isTrue);
+    });
+
+    test('Loop 159: Validates ILSF / ERC Coastal Drowning Hypoxic Arrest 5 Initial Rescue Breaths', () {
+      const drowning = DrowningSubmersionCpr(
+        submersionDurationMinutes: 4.0,
+        isVictimApneicOrPulseless: true,
+        isWaterFrothInAirwayPresent: true,
+        isCervicalSpineTraumaSuspected: false,
+        victimCoreTemperatureCelsius: 35.0,
+      );
+      expect(drowning.initialRescueBreathsCount, equals(5));
+      expect(drowning.compressionRatio, equals(30));
+      expect(drowning.ventilationRatio, equals(2));
+      expect(drowning.tacticalResuscitationProtocol.contains('5 INITIAL RESCUE BREATHS FIRST'), isTrue);
+      expect(drowning.airwayFrothManagementRule.contains('Do NOT waste time attempting to suction'), isTrue);
+      expect(drowning.secondaryDrowningWarning.contains('ARDS'), isTrue);
+    });
+
+    test('Loop 160: Validates Grand Master 160-Domain Supreme National Disaster & Crisis Rescue Nexus (NDROS 160)', () {
+      final nexus = NationalDisasterNexusService.getNexusMasterManifest();
+      expect(nexus.totalOperationalResilienceDomainsCount, equals(160));
+      expect(nexus.nationalCompositeResilienceIndexScore, greaterThan(99.5));
+      expect(nexus.apexPillarsAndProtocols.length, equals(6));
+      expect(nexus.realLifeCrisisRescueEngines.length, equals(20));
+      expect(nexus.strategicReadinessDirectives.length, equals(4));
+      final summary = nexus.generateNationalNexusSummary();
+      expect(summary.contains('NATIONAL DISASTER & CRISIS RESCUE NEXUS (NDROS 160)'), isTrue);
+      expect(summary.contains('Total Fully-Integrated Specialized Domains: 160 / 160'), isTrue);
+      expect(summary.contains('REAL-LIFE CRISIS RESCUE ENGINES (LOOPS 141-160):'), isTrue);
+      expect(summary.contains('L141: National Borewell Rescue'), isTrue);
+      expect(summary.contains('L160: Grand Master 160-Domain'), isTrue);
     });
   });
 }

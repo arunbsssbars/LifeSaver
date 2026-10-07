@@ -8,11 +8,11 @@ import 'screens/survival_playbook_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const LifeSaverApp());
+  runApp(const LifeSaver());
 }
 
-class LifeSaverApp extends StatelessWidget {
-  const LifeSaverApp({super.key});
+class LifeSaver extends StatelessWidget {
+  const LifeSaver({super.key});
 
   @override
   Widget build(BuildContext context) {
